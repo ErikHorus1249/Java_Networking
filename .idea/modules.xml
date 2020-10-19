@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DemoLTM/DemoLTM.iml" filepath="$PROJECT_DIR$/DemoLTM/DemoLTM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Https_Socket/Https_Socket.iml" filepath="$PROJECT_DIR$/Https_Socket/Https_Socket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java_Networking.iml" filepath="$PROJECT_DIR$/.idea/Java_Networking.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java_chat/Java_chat.iml" filepath="$PROJECT_DIR$/Java_chat/Java_chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java_socket_turtorial/Java_socket_turtorial.iml" filepath="$PROJECT_DIR$/Java_socket_turtorial/Java_socket_turtorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LTM_Demo/LTM_Demo.iml" filepath="$PROJECT_DIR$/LTM_Demo/LTM_Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocketClient/SocketClient.iml" filepath="$PROJECT_DIR$/SocketClient/SocketClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocketModle/SocketModle.iml" filepath="$PROJECT_DIR$/SocketModle/SocketModle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocketServer/SocketServer.iml" filepath="$PROJECT_DIR$/SocketServer/SocketServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/firstClass/firstClass.iml" filepath="$PROJECT_DIR$/firstClass/firstClass.iml" />
+    </modules>
+  </component>
+</project>
