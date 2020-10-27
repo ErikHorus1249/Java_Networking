@@ -1,4 +1,4 @@
-## Mã nguồn thô bài tập lớn LTM
+## Mã nguồn thô bài tập lớn LTM : Chat 1vs1, chưa bổ xung Database, chưa hỗ trợ gửi file
 
 ### Mô hình ứng dụng chat client - server (Java Socket)
 
