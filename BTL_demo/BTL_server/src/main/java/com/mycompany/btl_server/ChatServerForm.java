@@ -133,7 +133,7 @@ public class ChatServerForm extends javax.swing.JFrame {
         try {
             int port = Integer.parseInt(txtPort.getText());
             ServerSocket serverSocket = new ServerSocket(port);
-            txpMessageBoard.setText("Connected succesfully...");
+            txpMessageBoard.setText("Listening...\n");
             
             Thread th = new Thread(){
                public void run(){
@@ -141,10 +141,11 @@ public class ChatServerForm extends javax.swing.JFrame {
                         
                         txpMessageBoard.setText(txpMessageBoard.getText());
                         Socket socket = serverSocket.accept();
+                        txpMessageBoard.setText(txpMessageBoard.getText() + "\n Connected ! \n");
                         mSocket = new ChatMessageSocket(socket, txpMessageBoard); 
                         
                    } catch (Exception e) {
-                       txpMessageBoard.setText("<br> Error : " + e.getMessage());
+                       txpMessageBoard.setText("Error : " + e.getMessage());
                        e.printStackTrace();
                    }
  

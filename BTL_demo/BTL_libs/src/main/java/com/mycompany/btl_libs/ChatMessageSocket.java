@@ -42,7 +42,7 @@ public class ChatMessageSocket {
                     try{
                         String  line = reader.readLine();
                         if(line != null){
-                            txpMessageBoard.setText(txpMessageBoard.getText() +  "<br>" + line);
+                            txpMessageBoard.setText(txpMessageBoard.getText() +  "\n\n" + line);
                         }
                     }catch(Exception e){
                         
@@ -56,7 +56,7 @@ public class ChatMessageSocket {
     
     public void send(String msg){
         String current = txpMessageBoard.getText();
-        txpMessageBoard.setText(current + "<br> sent: " + msg);
+        txpMessageBoard.setText(current + "\n\nsent: " + msg);
         out.println(msg);
         out.flush();
     }
