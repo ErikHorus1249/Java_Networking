@@ -877,11 +877,19 @@ public class clientView extends javax.swing.JFrame {
     public void getNotify(String notifyContent, String notifyHeader, int status) {
         JOptionPane.showMessageDialog(null, notifyContent, notifyHeader, status);
     }
-
+    
+    public void getErrorNotify(){
+        JOptionPane.showMessageDialog(null,"Server not responding !","Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void changeStageOnline(int panelId){
+        minmenu.setSelectedIndex(panelId);
+    }
+    
     public void changeStage(int panelIndex) {
         main.setSelectedIndex(panelIndex);
     }
-
+    
     public void setTextDisplay(String msg) {
         jTextPane_displays.setText(msg);
     }

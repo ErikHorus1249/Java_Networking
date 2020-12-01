@@ -59,6 +59,11 @@ public class clientControl {
                 run();
                 break;
             }
+            if (view.getConnectStatus()==false && view.getSendStatus()==true) {
+                view.getErrorNotify();
+                view.changeStage(1);
+                view.setSendStatus(false);
+            }
         }
     }
 
@@ -78,6 +83,7 @@ public class clientControl {
         output = new PrintWriter(socket.getOutputStream(), true);
         output.println(nickName); // gui ten cho server
         view.disableTextField();
+        view.changeStageOnline(1);
         read = new Receive();
         read.start();
         while (!Thread.currentThread().isInterrupted()) {
