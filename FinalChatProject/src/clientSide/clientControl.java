@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientSide;
 
 import java.awt.Color;
@@ -77,18 +72,16 @@ public class clientControl {
 
         view.setTextDisplay("Connecting to " + socket.getRemoteSocketAddress() + "\n");
 
-        oldMsg += "Connected to " + socket.getRemoteSocketAddress() + "\n";
+        this.oldMsg += "Connected to " + socket.getRemoteSocketAddress() + "\n";
 
-        view.setTextDisplay(oldMsg + "Connected to " + socket.getRemoteSocketAddress() + "\n");
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         output = new PrintWriter(socket.getOutputStream(), true);
-
         output.println(nickName); // gui ten cho server
         view.disableTextField();
         read = new Receive();
         read.start();
         while (!Thread.currentThread().isInterrupted()) {
-            if(view.getSendStatus()){
+            if (view.getSendStatus()) {
                 sendMessage();
                 view.setSendStatus(false);
             }
@@ -107,7 +100,7 @@ public class clientControl {
         if (message.equals("")) {
             return;
         }
-        this.oldMsg = message;
+
         output.println(message);
 
         view.clearMessageTextField();
@@ -134,16 +127,19 @@ public class clientControl {
                             view.clearOnlineListDisplay();
                             String userListDis = "";
                             for (String user : ListUser) {
-
                                 userListDis += "\n#" + user;
                             }
-
                             view.setOnlineListDisplay(userListDis);
                             System.out.println(userListDis);
-                        } else {
-
+                        } else if (message.charAt(0)=='%') {
+                            message = message.substring(5,message.length());
+                            System.out.println("Tin nhan cu "+message);
+                            System.out.println(oldMsg);
                             oldMsg += "\n" + message;
-
+                            view.setTextDisplay(oldMsg);
+                        } else {
+                            System.out.println(oldMsg);
+                            oldMsg += "\n" + message;
                             view.setTextDisplay(oldMsg);
                         }
                     }

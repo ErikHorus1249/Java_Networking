@@ -33,7 +33,6 @@ public class clientView extends javax.swing.JFrame {
     private Color darklight;
     private Color darkTheme;
     private Color lightTheme;
-    private String oldMsg = "";
     private Thread read;
     private boolean sendStatus;
     private boolean connectStatus;

@@ -8,19 +8,17 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.awt.Color;
 
 public class serverControl {
 
-    private int PORT;
-    private List<User> users;
+    private final int PORT;
+    private final List<User> users;
     private ServerSocket server;
+    private String oldMessage;
 
     public serverControl(int port) {
         this.PORT = port;
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<>();
     }
 
     public void run() throws IOException {
@@ -37,35 +35,42 @@ public class serverControl {
         while (!Thread.currentThread().isInterrupted()) {
 
             Socket socket = server.accept();// khoi tao client socket khi server accept
-            String nickname = (new Scanner(socket.getInputStream())).nextLine();// lay ten cua user
+            String nickname = (new Scanner(socket.getInputStream())).nextLine().trim();// lay ten cua user
             nickname = validate(nickname);
             System.out.println("New Client: \"" + nickname + "\"     Host:" + socket.getInetAddress().getHostAddress());
             new Thread(new UserHandler(this, addUser(socket, nickname))).start();// chay luong bat tin nhan moi cua nguoi dung
-
+            System.out.println("OLD "+oldMessage);
         }
     }
 
-    public User addUser(Socket sock, String nickname) throws IOException {
+    private User addUser(Socket sock, String nickname) throws IOException {
 
         User newUser = new User(sock, nickname);// tao moi doi tuong nguoi dung
         this.users.add(newUser);// them doi tuong nguoi dung vao list
         sendNickname(newUser);
+        sendOldMessage(newUser);
         return newUser;
 
     }
-    
+
     public void removeUser(User user) { // xoa nguoi dung khoi danh sach
         this.users.remove(user);
     }
-    
+
     private void sendNickname(User user) {// gui lai ten inchat cho nguoi dung
         user.getOutStream().println("Server give your nickname : " + user.toString());
     }
 
+    private void sendOldMessage(User user) {
+        if(oldMessage!=null) user.getOutStream().println("%"+getOldMessage());
+    }
+
     public void broadcastMessages(String msg, User userSender) { // gui tin nhan cho toan bo nguoi trong group
-        for (User client : this.users) {
-            client.getOutStream().println("@ " + userSender.getNickname() + " : " + msg);
+        String sendMess = "@ " + userSender.getNickname() + " : " + msg;
+        for (User client : this.users) {    
+            client.getOutStream().println(sendMess);
         }
+        setOldMessage("\n"+sendMess);
     }
 
     public void broadcastAllUsers() {// gui danh sach nguoi dang onlne cho cac nguoi dung khac
@@ -75,7 +80,7 @@ public class serverControl {
     }
 
     private String validate(String nickname) {
-        nickname = nickname.replace(",", ""); //  ',' use for serialisation
+        nickname = nickname.replace(",", "");
         nickname = nickname.replace(" ", "_");
         return nickname;
     }
@@ -97,6 +102,14 @@ public class serverControl {
         if (!find) {
             userSender.getOutStream().println(userSender.toString() + " -> no one!): " + msg);
         }
+    }
+
+    public String getOldMessage() {
+        return oldMessage;
+    }
+
+    public void setOldMessage(String msg) {
+        this.oldMessage += msg;
     }
 }
 
@@ -122,7 +135,9 @@ class UserHandler implements Runnable {
             if (message.charAt(0) == '@') { // chat an danh
                 privateSend(message);
             } else {// chat cong khai
+
                 publicSend(message);
+
             }
         }
         // end of Thread
@@ -133,6 +148,7 @@ class UserHandler implements Runnable {
 
     private void publicSend(String message) {
         System.out.println("Public");
+
         server.broadcastMessages(message, user);
     }
 
