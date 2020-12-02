@@ -120,7 +120,7 @@ public class clientControl {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     message = input.readLine();
-                    System.out.println("truoc " + message);
+//                    System.out.println("truoc " + message);
 
                     if (message != null) {
 
@@ -136,15 +136,15 @@ public class clientControl {
                                 userListDis += "\n#" + user;
                             }
                             view.setOnlineListDisplay(userListDis);
-                            System.out.println(userListDis);
+//                            System.out.println(userListDis);
                         } else if (message.charAt(0)=='%') {
                             message = message.substring(5,message.length());
-                            System.out.println("Tin nhan cu "+message);
-                            System.out.println(oldMsg);
+//                            System.out.println("Tin nhan cu "+message);
+//                            System.out.println(oldMsg);
                             oldMsg += "\n" + message;
                             view.setTextDisplay(oldMsg);
                         } else {
-                            System.out.println(oldMsg);
+//                            System.out.println(oldMsg);
                             oldMsg += "\n" + message;
                             view.setTextDisplay(oldMsg);
                         }
